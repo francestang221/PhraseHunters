@@ -24,6 +24,7 @@ class Game:
         """
 
         correct_guesses_so_far = 0
+        guessed = []
 
         while not Phrase.all_guessed(self.target_phrase):
 
@@ -42,9 +43,13 @@ class Game:
                 Phrase.check_guess(self.target_phrase, guess)
 
                 if Phrase.guessed_char(self.target_phrase) == correct_guesses_so_far:
-                    self.chances -= 1
-                    print("\n~~~You have {} out 5 lives remaining.~~~~\n".format(self.chances))
+                    if guess not in guessed:
+                        self.chances -= 1
+                        print("\n~~~You have {} out 5 lives remaining.~~~~\n".format(self.chances))
+                    else:
+                        print("\nYou already guessed this letter. Try a different one. \n")
                 else:
+                    guessed.append(guess)
                     print("\n~~~~Good job!~~~~~\n")
                     correct_guesses_so_far = Phrase.guessed_char(self.target_phrase)
 
