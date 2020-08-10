@@ -1,6 +1,5 @@
 # Create your Game class logic in here.
 
-from phrasehunter.character import Character
 from phrasehunter.phrase import Phrase
 import random
 
@@ -19,24 +18,32 @@ class Game:
     def new_game(self):
         correct_guesses_so_far = 0
 
-        while self.chances > 0:
-            Phrase.show_phrase(self.target_phrase)
-            print("\n")
-            guess = input("Guess a letter: ")
-            if len(guess) != 1:
-                guess = input("\nnot a valid guess. try again: ")
+        while not Phrase.all_guessed(self.target_phrase):
+            print(Phrase.goal_guess(self.target_phrase))
+            print(Phrase.guessed_char(self.target_phrase))
+            if self.chances < 1:
+                self.win = False
+                break
 
-            Phrase.validate_guess(self.target_phrase, guess)
-            if Phrase.guessed_char(self.target_phrase) == correct_guesses_so_far:
-                self.chances -= 1
-                print("\n~~~You have {} out 5 lives remaining.~~~~\n".format(self.chances))
             else:
-                print("\nGood job!\n")
-                correct_guesses_so_far = Phrase.guessed_char(self.target_phrase)
+                Phrase.show_phrase(self.target_phrase)
+                print("\n")
+                guess = input("Guess a letter: ")
 
+                if len(guess) != 1:
+                    guess = input("\nnot a valid guess. try again: ")
 
+                Phrase.validate_guess(self.target_phrase, guess)
 
+                if Phrase.guessed_char(self.target_phrase) == correct_guesses_so_far:
+                    self.chances -= 1
+                    print("\n~~~You have {} out 5 lives remaining.~~~~\n".format(self.chances))
+                else:
+                    print("\nGood job!\n")
+                    correct_guesses_so_far = Phrase.guessed_char(self.target_phrase)
 
+        if Phrase.all_guessed(self.target_phrase):
+            self.win = True
         self.display_result()
 
     def display_result(self):

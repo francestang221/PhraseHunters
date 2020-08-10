@@ -7,11 +7,14 @@ class Character:
         self.char = char
         self.was_guessed = was_guessed
 
+    def get_char(self):
+        return self.char
+
     def show_char(self):
         if self.was_guessed or self.char == " ":
-            print(self.char, end="")
+            return self.char
         else:
-            print("_", end="")
+            return "_"
 
     def check_guess(self, guess):
         if guess == self.char:
