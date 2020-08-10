@@ -4,6 +4,7 @@ import random
 
 class Game:
     """ Represents a Game object """
+
     def __init__(self, phrase_list):
         self.phrase_list = [Phrase(phrase) for phrase in phrase_list]
         self.target_phrase = random.choice(self.phrase_list)
@@ -12,7 +13,7 @@ class Game:
 
     def start_game(self):
         """ Prints out a welcome message and start the game """
-        print("\nWelcome to the Phrase Hunters Game! \n")
+        print("\n>>> Welcome to the Phrase Hunters Game! <<<\n")
         self.new_game()
 
     def new_game(self):
@@ -45,28 +46,29 @@ class Game:
                 if Phrase.guessed_char(self.target_phrase) == correct_guesses_so_far:
                     if guess not in guessed:
                         self.chances -= 1
-                        print("\n~~~You have {} out 5 lives remaining.~~~~\n".format(self.chances))
+                        print("\n>>> You have {} out 5 lives remaining. <<< \n".format(self.chances))
                     else:
                         print("\nYou already guessed this letter. Try a different one. \n")
                 else:
                     guessed.append(guess)
-                    print("\n~~~~Good job!~~~~~\n")
+                    print("\n>>> Good job! <<< \n")
                     correct_guesses_so_far = Phrase.guessed_char(self.target_phrase)
 
         if Phrase.all_guessed(self.target_phrase):
             self.win = True
-        self.display_result()
 
-        self.play_again()
+        self.display_result()
 
     def display_result(self):
         """
         Prints out the message depending on the game result
+        Asks the player to play again
         """
         if self.win:
-            print("Congratulations! You won!")
+            print(">>> Congratulations! You won! <<<")
         else:
-            print("You lost...Better luck next time!")
+            print(">>> You lost...Better luck next time! <<<")
+        self.play_again()
 
     def reset(self):
         """
@@ -83,13 +85,14 @@ class Game:
         Restart the game if yes
         Print a farewell message if otherwise
         """
-        answer = input("\nWould you like to play another round? Press Y to play or any other key to quit: \n")
+        answer = input("\nWould you like to play another round? Press 'Y' to play or any other key to quit: \n")
+
         if answer.lower() == "y":
             self.reset()
             self.start_game()
 
         else:
-            print("\n ~~~~~~See you next time!~~~~~~~ ")
+            print("\n >>> See you next time! <<< ")
 
 
 
