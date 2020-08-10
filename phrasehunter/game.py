@@ -5,13 +5,16 @@ class Game:
     def __init__(self, game_on=False):
         self.game_on = game_on
 
-
     def startGame(self):
-        return None
+        print("\nWelcome to the Phrase Hunters Game! \n")
 
     def askPlayer(self):
-        input("Guess a character: ")
+        input("Guess a letter: ")
 
-    def result(self):
-        # win or loss
+    def game_result(self, win=False):
+        while self.game_on:
+            if win:
+                print("Congrats! You won!")
+            else:
+                print("Oh well...Better luck next time!")
 
