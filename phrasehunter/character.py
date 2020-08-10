@@ -1,6 +1,3 @@
-# Create your Character class logic in here.
-
-
 class Character:
     """Represents a single character"""
     def __init__(self, char, was_guessed=False):
