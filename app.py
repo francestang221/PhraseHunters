@@ -34,6 +34,7 @@ def main():
                 print("_", end="")
             if letter == " ":
                 print(" ", end="")
+
         tar = list(target)
 
         # guess
