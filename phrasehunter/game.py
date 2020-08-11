@@ -52,7 +52,7 @@ class Game:
                 else:
                     guessed.append(guess)
                     print("\n>>> Good job! <<< \n")
-                    correct_guesses_so_far = Phrase.guessed_char(self.target_phrase)
+                    correct_guesses_so_far = self.target_phrase.guessed_char()
 
         if self.target_phrase.all_guessed():
             self.win = True
