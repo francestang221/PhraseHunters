@@ -22,7 +22,7 @@ class Character:
         """
         Updates the guess status to True if the guess matches the char
         """
-        if guess == self.char:
+        if guess.lower() == self.char:
             self.was_guessed = True
 
     def reset_guessed(self):

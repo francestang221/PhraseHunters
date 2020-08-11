@@ -27,23 +27,23 @@ class Game:
         correct_guesses_so_far = 0
         guessed = []
 
-        while not Phrase.all_guessed(self.target_phrase):
+        while not self.target_phrase.all_guessed():
 
             if self.chances < 1:
                 self.win = False
                 break
 
             else:
-                Phrase.show_phrase(self.target_phrase)
+                self.target_phrase.show_phrase()
                 print("\n")
                 guess = input("Guess a letter: ")
 
                 while len(guess) > 1 or guess.isalpha() is False:
                     guess = input("\nnot a valid guess. try again: ")
 
-                Phrase.check_guess(self.target_phrase, guess)
+                self.target_phrase.check_guess(guess)
 
-                if Phrase.guessed_char(self.target_phrase) == correct_guesses_so_far:
+                if self.target_phrase.guessed_char() == correct_guesses_so_far:
                     if guess not in guessed:
                         self.chances -= 1
                         print("\n>>> You have {} out 5 lives remaining. <<< \n".format(self.chances))
@@ -54,7 +54,7 @@ class Game:
                     print("\n>>> Good job! <<< \n")
                     correct_guesses_so_far = Phrase.guessed_char(self.target_phrase)
 
-        if Phrase.all_guessed(self.target_phrase):
+        if self.target_phrase.all_guessed():
             self.win = True
 
         self.display_result()
@@ -77,7 +77,7 @@ class Game:
         self.target_phrase = random.choice(self.phrase_list)
         self.chances = 5
         self.win = False
-        Phrase.reset_phrase(self.target_phrase)
+        self.target_phrase.reset_phrase()
 
     def play_again(self):
         """
