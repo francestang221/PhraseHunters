@@ -1,4 +1,4 @@
-#Phrase Hunters
+#phrase-hunters
 
 
 This is a word guessing game: "Phrase Hunter", built using Python and OOP (Object-Oriented Programming) approaches to select a phrase at random, hidden from the player. 
